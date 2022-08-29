@@ -57,6 +57,23 @@ function handleSubmit(event) {
 
 searchCity("London");
 
+function getCoords(position) {
+  let longitude = position.coords.longitude;
+  let latitude = position.coords.latitude;
+  let apiKey = "72b484ab5570dfdd776f4960e244a513";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showCityWeather);
+}
+
+function getLocation(event) {
+  event.preventDefault();
+  navigator.geolocation.getCurrentPosition(getCoords);
+}
+
 let searchFormElement = document.querySelector("#search-form");
 
 searchFormElement.addEventListener("submit", handleSubmit);
+
+let currentLocationElement = document.querySelector("#current-location-button");
+
+currentLocationElement.addEventListener("click", getLocation);

@@ -43,8 +43,20 @@ function showCityWeather(response) {
   weatherIconElement.setAttribute("alt", response.data.weather[0].main);
 }
 
-let apiKey = "72b484ab5570dfdd776f4960e244a513";
+function searchCity(city) {
+  let apiKey = "72b484ab5570dfdd776f4960e244a513";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showCityWeather);
+}
 
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=London&appid=${apiKey}&units=metric`;
+function handleSubmit(event) {
+  event.preventDefault();
+  let cityInput = document.querySelector("#search-bar").value;
+  searchCity(cityInput);
+}
 
-axios.get(apiUrl).then(showCityWeather);
+searchCity("London");
+
+let searchFormElement = document.querySelector("#search-form");
+
+searchFormElement.addEventListener("submit", handleSubmit);

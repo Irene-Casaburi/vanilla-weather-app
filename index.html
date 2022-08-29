@@ -14,17 +14,19 @@
 
 <body>
     <div class="container">
+        <form id="search-form">
+            <input type="search" id="search-bar" placeholder="Search for a city..." autocomplete="off">
+            <input type="submit" id="search-button" value="Search">
+        </form>
         <h1 id="city">
-            City
         </h1>
         <h2>
-            <img src="" alt="Weather Icon" id="weather-icon" />
-            <span class="temperature" id="temperature">Temperature</span>
+            <img src="" alt="" id="weather-icon" />
+            <span class="temperature" id="temperature"></span>
             <span class="units">°C °F </span>
         </h2>
         <h3>Last updated: <span id="date-time"></span></h3>
         <h4 id="conditions">
-            Conditions
         </h4>
         <ul>
             <li> Humidity: <span id="humidity"></span> %</li>

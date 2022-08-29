@@ -30,7 +30,10 @@ function showCityWeather(response) {
   let windElement = document.querySelector("#wind");
   let dateElement = document.querySelector("#date-time");
   let weatherIconElement = document.querySelector("#weather-icon");
-  temperatureElement.innerHTML = Math.round(response.data.main.temp);
+
+  celsiusTemperature = response.data.main.temp;
+
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
   cityElement.innerHTML = response.data.name;
   conditionsElement.innerHTML = response.data.weather[0].main;
   humidityElement.innerHTML = response.data.main.humidity;
@@ -55,8 +58,6 @@ function handleSubmit(event) {
   searchCity(cityInput);
 }
 
-searchCity("London");
-
 function getCoords(position) {
   let longitude = position.coords.longitude;
   let latitude = position.coords.latitude;
@@ -70,10 +71,30 @@ function getLocation(event) {
   navigator.geolocation.getCurrentPosition(getCoords);
 }
 
-let searchFormElement = document.querySelector("#search-form");
+function showFahrenheitTemperature(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
+}
 
+function showCelsiusTemperature(event) {
+  event.preventDefault();
+  let temperatureElement = document.querySelector("#temperature");
+  temperatureElement.innerHTML = Math.round(celsiusTemperature);
+}
+
+let celsiusTemperature = null;
+
+let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSubmit);
 
 let currentLocationElement = document.querySelector("#current-location-button");
-
 currentLocationElement.addEventListener("click", getLocation);
+
+let celsiusElement = document.querySelector("#celsius-temperature");
+let fahrenheitElement = document.querySelector("#fahrenheit-temperature");
+celsiusElement.addEventListener("click", showCelsiusTemperature);
+fahrenheitElement.addEventListener("click", showFahrenheitTemperature);
+
+searchCity("London");

@@ -122,30 +122,10 @@ function getLocation(event) {
   navigator.geolocation.getCurrentPosition(getCoords);
 }
 
-function showFahrenheitTemperature(event) {
-  event.preventDefault();
-  let fahrenheitTemperature = (celsiusTemperature * 9) / 5 + 32;
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(fahrenheitTemperature);
-}
-
-function showCelsiusTemperature(event) {
-  event.preventDefault();
-  let temperatureElement = document.querySelector("#temperature");
-  temperatureElement.innerHTML = Math.round(celsiusTemperature);
-}
-
-let celsiusTemperature = null;
-
 let searchFormElement = document.querySelector("#search-form");
 searchFormElement.addEventListener("submit", handleSubmit);
 
 let currentLocationElement = document.querySelector("#current-location-button");
 currentLocationElement.addEventListener("click", getLocation);
-
-let celsiusElement = document.querySelector("#celsius-temperature");
-let fahrenheitElement = document.querySelector("#fahrenheit-temperature");
-celsiusElement.addEventListener("click", showCelsiusTemperature);
-fahrenheitElement.addEventListener("click", showFahrenheitTemperature);
 
 searchCity("London");
